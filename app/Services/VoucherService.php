@@ -6,7 +6,7 @@ use App\Events\Vouchers\VouchersCreated;
 use App\Models\User;
 use App\Models\Voucher;
 use App\Models\VoucherLine;
-
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Ramsey\Uuid\Uuid;
 use SimpleXMLElement;
@@ -28,9 +28,26 @@ class VoucherService
         $voucher->delete();
     }
 
-    public function getVouchers(int $page, int $paginate): LengthAwarePaginator
+    public function getVouchers(?string $serie, ?string $numero, ?string $fechaInicio, ?string $fechaFin, int $page, int $paginate): LengthAwarePaginator
     {
-        return Voucher::with(['lines', 'user'])->paginate(perPage: $paginate, page: $page);
+        //serie, numero y por un rango de fechas
+        $query = Voucher::query();
+
+        if ($serie) {
+            $query->where('id', $serie);
+        }
+
+        if ($numero) {
+            $query->where('issuer_document_number', $numero);
+        }
+
+        if ($fechaInicio && $fechaFin) {
+            $fechaInicio = Carbon::createFromFormat('d-m-Y', $fechaInicio)->startOfDay();
+            $fechaFin = Carbon::createFromFormat('d-m-Y', $fechaFin)->endOfDay();
+            $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+        }
+
+        return $query->with(['lines', 'user'])->paginate(perPage: $paginate, page: $page);
     }
 
     /**

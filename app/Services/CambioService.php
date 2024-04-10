@@ -13,10 +13,12 @@ use SimpleXMLElement;
 
 class CambioService
 {
-    // Propiedad estática para almacenar las conversiones de moneda
+
     public static $monedas = [
         'USD' => 0.27,
+        //Se pueden agregar mas conversiones
     ];
+
 
     public static function convertir(float $cantidad = 0, string $moneda)
     {

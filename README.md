@@ -59,9 +59,9 @@ Se necesita un nuevo endpoint que devuelva la información total acumulada en so
 
 Se necesita poder eliminar comprobantes por su id. ✅
 
-### 5. Filtro en listado de comprobantes
+### 5. Filtro en listado de comprobantes ✅
 
-Se necesita poder filtrar en el endpoint de listado por serie, número y por un rango de fechas (que actuarán sobre las fechas de creación).
+Se necesita poder filtrar en el endpoint de listado por serie, número y por un rango de fechas (que actuarán sobre las fechas de creación). ✅
 
 **Nota**: En todos los casos de nuevas funcionalidades, se tratan de comprobantes por usuarios.
 
