@@ -6,11 +6,22 @@ use App\Events\Vouchers\VouchersCreated;
 use App\Models\User;
 use App\Models\Voucher;
 use App\Models\VoucherLine;
+
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Ramsey\Uuid\Uuid;
 use SimpleXMLElement;
 
 class VoucherService
 {
+    //Funcion para obtener Voucher por ID
+    public function getVoucherByID($id): Voucher{
+        return Voucher::findOrFail($id);
+    }
+
+    //Funcion para borrar voucher
+    public function deleteVoucher(Voucher $voucher): void{
+        $voucher->delete();
+    }
     public function getVouchers(int $page, int $paginate): LengthAwarePaginator
     {
         return Voucher::with(['lines', 'user'])->paginate(perPage: $paginate, page: $page);
