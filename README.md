@@ -51,13 +51,13 @@ Además, en lugar de enviar una notificación por correo para informar subida de
 -   Los que se subieron correctamente
 -   Los que no pudieron registrarse (y la razón)
 
-### 3. Endpoint de montos totales
+### 3. Endpoint de montos totales ✅
 
-Se necesita un nuevo endpoint que devuelva la información total acumulada en soles y dólares.
+Se necesita un nuevo endpoint que devuelva la información total acumulada en soles y dólares. ✅
 
-### 4. Eliminación de comprobantes
+### 4. Eliminación de comprobantes ✅
 
-Se necesita poder eliminar comprobantes por su id.
+Se necesita poder eliminar comprobantes por su id. ✅
 
 ### 5. Filtro en listado de comprobantes
 

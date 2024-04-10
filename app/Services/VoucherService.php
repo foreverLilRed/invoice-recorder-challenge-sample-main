@@ -13,6 +13,11 @@ use SimpleXMLElement;
 
 class VoucherService
 {
+    //Funcion para obtener la suma de los campos "total_amount"
+    public function totalQuantity(): float{
+        return Voucher::sum('total_amount');
+    }
+    
     //Funcion para obtener Voucher por ID
     public function getVoucherByID($id): Voucher{
         return Voucher::findOrFail($id);
@@ -22,6 +27,7 @@ class VoucherService
     public function deleteVoucher(Voucher $voucher): void{
         $voucher->delete();
     }
+
     public function getVouchers(int $page, int $paginate): LengthAwarePaginator
     {
         return Voucher::with(['lines', 'user'])->paginate(perPage: $paginate, page: $page);
