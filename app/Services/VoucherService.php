@@ -40,11 +40,11 @@ class VoucherService
         $query = Voucher::query();
 
         if ($serie) {
-            $query->where('id', $serie);
+            $query->where('serie', $serie);
         }
 
         if ($numero) {
-            $query->where('issuer_document_number', $numero);
+            $query->where('numero', $numero);
         }
 
         if ($fechaInicio && $fechaFin) {
