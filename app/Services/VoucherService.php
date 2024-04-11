@@ -34,7 +34,7 @@ class VoucherService
         $voucher->delete();
     }
 
-    public function getVouchers(?string $serie, ?string $numero, ?string $fechaInicio, ?string $fechaFin, int $page, int $paginate): LengthAwarePaginator
+    public function getVouchers(?string $serie, ?string $numero,?string $tipo_comprobante,?string $moneda, ?string $fechaInicio, ?string $fechaFin, int $page, int $paginate): LengthAwarePaginator
     {
         //serie, numero y por un rango de fechas
         $query = Voucher::query();
@@ -45,6 +45,14 @@ class VoucherService
 
         if ($numero) {
             $query->where('numero', $numero);
+        }
+
+        if ($tipo_comprobante) {
+            $query->where('tipo_comprobante', $tipo_comprobante);
+        }
+
+        if ($moneda) {
+            $query->where('moneda', $moneda);
         }
 
         if ($fechaInicio && $fechaFin) {

@@ -18,6 +18,8 @@ class GetVouchersHandler
         $vouchers = $this->voucherService->getVouchers(
             $request->query('serie'),
             $request->query('numero'),
+            $request->query('tipo_comprobante'),
+            $request->query('moneda'),
             $request->query('fechaInicio'),
             $request->query('fechaFin'),
             $request->query('page'),
