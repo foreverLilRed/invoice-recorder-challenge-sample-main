@@ -20,7 +20,13 @@ class VoucherService
     
     //Funcion para obtener Voucher por ID
     public function getVoucherByID($id): Voucher{
-        return Voucher::findOrFail($id);
+        $partes = explode("-", $id);
+        $serie = $partes[0];
+        $numero = $partes[1];
+
+        return Voucher::where('serie', $serie)
+                    ->where('numero', $numero)
+                    ->firstOrFail();
     }
 
     //Funcion para borrar voucher
