@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Vouchers;
 
 use App\Http\Resources\Vouchers\VoucherResource;
+use App\Jobs\Notificaciones;
 use App\Services\VoucherService;
 use Exception;
 use Illuminate\Http\Request;
@@ -33,10 +34,11 @@ class StoreVouchersHandler
             }
 
             $user = auth()->user();
-            $vouchers = $this->voucherService->storeVouchersFromXmlContents($xmlContents, $user, $serie, $numero, $tipo_comprobante, $moneda);
+
+            Notificaciones::dispatchAfterResponse($xmlContents, $user, $serie, $numero, $tipo_comprobante, $moneda);
 
             return response([
-                'data' => VoucherResource::collection($vouchers),
+                'data' => 'Se proceso la peticion',
             ], 201);
         } catch (Exception $exception) {
             return response([
