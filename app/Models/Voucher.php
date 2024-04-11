@@ -37,6 +37,10 @@ class Voucher extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'serie',
+        'numero',
+        'tipo_comprobante',
+        'moneda',
         'issuer_name',
         'issuer_document_type',
         'issuer_document_number',

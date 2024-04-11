@@ -55,11 +55,11 @@ class VoucherService
      * @param User $user
      * @return Voucher[]
      */
-    public function storeVouchersFromXmlContents(array $xmlContents, User $user): array
+    public function storeVouchersFromXmlContents(array $xmlContents, User $user, ?string $serie, ?string $numero, ?string $tipo_comprobante, ?string $moneda): array
     {
         $vouchers = [];
         foreach ($xmlContents as $xmlContent) {
-            $vouchers[] = $this->storeVoucherFromXmlContent($xmlContent, $user);
+            $vouchers[] = $this->storeVoucherFromXmlContent($xmlContent, $user, $serie, $numero, $tipo_comprobante, $moneda);
         }
 
         VouchersCreated::dispatch($vouchers, $user);
@@ -67,7 +67,7 @@ class VoucherService
         return $vouchers;
     }
 
-    public function storeVoucherFromXmlContent(string $xmlContent, User $user): Voucher
+    public function storeVoucherFromXmlContent(string $xmlContent, User $user, ?string $serie, ?string $numero, ?string $tipo_comprobante, ?string $moneda): Voucher
     {
         $xml = new SimpleXMLElement($xmlContent);
 
@@ -81,7 +81,28 @@ class VoucherService
 
         $totalAmount = (string) $xml->xpath('//cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount')[0];
 
+        if ($serie === null && $numero === null) {
+            $id = (string) $xml->xpath('//cbc:ID')[0] ?? null;
+            if ($id) {
+                $parts = explode("-", $id);
+                $serie = $parts[0] ?? null;
+                $numero = $parts[1] ?? null;
+            }
+        }
+        
+        if ($tipo_comprobante === null) {
+            $tipo_comprobante = (string) $xml->xpath('//cbc:InvoiceTypeCode')[0] ?? null;
+        }
+        
+        if ($moneda === null) {
+            $moneda = (string) $xml->xpath('//cbc:DocumentCurrencyCode')[0] ?? null;
+        }$moneda = (string) $xml->xpath('//cbc:DocumentCurrencyCode')[0];
+
         $voucher = new Voucher([
+            'serie' => $serie,
+            'numero' => $numero,
+            'tipo_comprobante' => $tipo_comprobante,
+            'moneda' => $moneda,
             'issuer_name' => $issuerName,
             'issuer_document_type' => $issuerDocumentType,
             'issuer_document_number' => $issuerDocumentNumber,

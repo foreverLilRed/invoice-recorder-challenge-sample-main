@@ -39,9 +39,9 @@ Puedes encontrar información inicial para popular la DB en el siguiente enlace:
 
 ## Nuevas funcionalidades
 
-### 1. Registro de serie, número, tipo del comprobante y moneda
+### 1. Registro de serie, número, tipo del comprobante y moneda ✅
 
-Se desea poder registrar la serie, número, tipo de comprobante y moneda. Para comprobantes existentes, debería extraerse esa información a regularizar desde el campo xml_content de vouchers.
+Se desea poder registrar la serie, número, tipo de comprobante y moneda. Para comprobantes existentes, debería extraerse esa información a regularizar desde el campo xml_content de vouchers. ✅
 
 ### 2. Carga de comprobantes en segundo plano
 

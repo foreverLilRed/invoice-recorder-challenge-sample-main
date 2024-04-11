@@ -18,6 +18,10 @@ class StoreVouchersHandler
     {
         try {
             $xmlFiles = $request->file('files');
+            $serie = $request->file('serie');
+            $numero = $request->file('numero');
+            $tipo_comprobante = $request->file('tipo_comprobante');
+            $moneda = $request->file('moneda');
 
             if (!is_array($xmlFiles)) {
                 $xmlFiles = [$xmlFiles];
@@ -29,7 +33,7 @@ class StoreVouchersHandler
             }
 
             $user = auth()->user();
-            $vouchers = $this->voucherService->storeVouchersFromXmlContents($xmlContents, $user);
+            $vouchers = $this->voucherService->storeVouchersFromXmlContents($xmlContents, $user, $serie, $numero, $tipo_comprobante, $moneda);
 
             return response([
                 'data' => VoucherResource::collection($vouchers),
