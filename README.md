@@ -65,14 +65,3 @@ Se necesita poder filtrar en el endpoint de listado por serie, número y por un 
 
 **Nota**: En todos los casos de nuevas funcionalidades, se tratan de comprobantes por usuarios.
 
-## Consideraciones
-
--   Se valorará el uso de código limpio, estándares, endpoints optimizados, tolerancia a fallos y concurrencia.
-
-## Envío del reto
-
-Deberás enviar el enlace del repositorio lo correos `administracion@idbi.pe`, `people@idbi.pe` y `product@idbi.pe`. Puedes indicar documentación de las nuevas funcionalidades o una descripción/diagramas/etc que creas necesario.
-
-## ¿Tienes alguna duda?
-
-Puedes enviar un correo a `anthony.rosado.idbi@gmail.com` enviando tus consultas y se te responderá a la brevedad.
